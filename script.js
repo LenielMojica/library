@@ -7,21 +7,22 @@ const libraryContainer = document.querySelector(".book-grid");
 
 const myLibrary = [];
 
-function Book(title, author, pages, isRead, id) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.isRead = isRead;
-  this.id = id;
-}
-
-Book.prototype.markUnread = function () {
-  if (this.isRead) {
-    this.isRead = false;
-  } else {
-    this.isRead = true;
+class Book {
+  constructor(title, author, pages, isRead, id) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.isRead = isRead;
+    this.id = id;
   }
-};
+  toggleIsRead() {
+    if (this.isRead) {
+      this.isRead = false;
+    } else {
+      this.isRead = true;
+    }
+  }
+}
 
 function addBookToLibrary(book) {
   myLibrary.push(book);
@@ -76,7 +77,7 @@ function createCard(book) {
       return b.id == id;
     });
 
-    book.markUnread();
+    book.toggleIsRead();
     status.textContent = book.isRead ? "Read" : "Not read";
     toggleRead.textContent = book.isRead ? "Mark unread" : "Mark read";
   });
